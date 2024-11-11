@@ -1,0 +1,22 @@
+<div class="form-wrap">
+    <div class=" form-container">
+        <h2>Buy Stocks</h2>
+        <form>
+            <div class="form-group">
+                <label for="stockSymbol">Stock Symbol:</label><br>
+                <input type="text" placeholder="Enter stock symbol (e.g., AAPL)" name="driverName" class="form-stockSymbol"  required [(ngModel)]="stock.symbol"/>
+            </div>
+
+            <div *ngIf="fetchedPrice !== null" class="price-display">
+                <label>Price per Unit (USD):</label>
+                <p>{{ fetchedPrice | currency:'USD' }}</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="stockSymbol">Enter Number you want to purchase</label><br>
+                <input type="number" placeholder="Enter number of unit" name="driverName" class="form-stockSymbol"  required [(ngModel)]="stock.units"/>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4" (click)="buyStock()">Adding</button>
+        </form>
+    </div>
+</div>
