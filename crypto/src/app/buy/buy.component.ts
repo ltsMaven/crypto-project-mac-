@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./buy.component.css']
 })
 export class BuyComponent {
-  stock: Stock = new Stock('AAPL', null, null);
+  stock: Stock = new Stock('', null, null);
   fetchedPrice: number | null = null;
   stockArray: string[] = [];
 
@@ -31,7 +31,9 @@ export class BuyComponent {
       this.dbService.getStockQuotes(this.stock.symbol).subscribe({
         next: (data: any) => {
           this.fetchedPrice = data.c; // Latest price from the API
-          if (this.fetchedPrice !== null) {
+          
+          // Check if the fetched price is valid
+          if (this.fetchedPrice !== null && this.fetchedPrice > 0) {
             this.stock.price = this.fetchedPrice; // Set the stock price to the latest price
 
             // Proceed with the purchase only after fetching the price
@@ -42,10 +44,11 @@ export class BuyComponent {
               },
               error: (err: any) => {
                 console.error('Error during stock purchase:', err);
+                alert('Stock does not exist.');
               }
             });
           } else {
-            alert('Failed to retrieve the latest price.');
+            alert('Invalid stock symbol. Please check the symbol and try again.');
           }
         },
         error: (err: any) => {

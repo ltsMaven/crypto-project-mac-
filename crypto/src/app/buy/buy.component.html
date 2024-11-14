@@ -4,7 +4,7 @@
         <form>
             <div class="form-group">
                 <label for="stockSymbol">Stock Symbol:</label><br>
-                <input type="text" placeholder="Enter stock symbol (e.g., AAPL)" name="driverName" class="form-stockSymbol"  required [(ngModel)]="stock.symbol"/>
+                <input type="text" placeholder="Enter stock symbol (e.g., AAPL)" class="form-stockSymbol"  required [(ngModel)]="stock.symbol"/>
             </div>
 
             <div *ngIf="fetchedPrice !== null" class="price-display">
